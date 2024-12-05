@@ -122,9 +122,9 @@ const login = async (req, res) => {
   }
 };
 
-// router.get("/validate-token", verifyToken, (req, res) => {
-//   res.status(200).send({ userId: req.userId });
-// });
+const validateToken = async (req, res) => {
+  res.status(200).send({ userId: req.userId });
+};
 
 //user logout
 const logout = async (req, res) => {
@@ -139,4 +139,4 @@ const logout = async (req, res) => {
   }
 };
 
-export { register, login, logout, getUser };
+export { register, login, logout, getUser, validateToken };
