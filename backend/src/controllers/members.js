@@ -1,17 +1,53 @@
 import { prisma } from "../db.js";
 
 export const getMembers = async (req, res) => {
+  const {
+    search,
+    page = 1,
+    limit = 10,
+    sortField = "name",
+    sortOrder = "asc",
+  } = req.query;
+
   try {
+    const pageNumber = parseInt(page);
+    const pageSize = parseInt(limit);
+
+    const where = search
+      ? {
+          OR: [
+            { name: { contains: search, mode: "insensitive" } },
+            { email: { contains: search, mode: "insensitive" } },
+          ],
+        }
+      : {};
+
     const members = await prisma.member.findMany({
+      where,
+      skip: (pageNumber - 1) * pageSize,
+      take: pageSize,
+      orderBy: {
+        [sortField]: sortOrder === "asc" ? "asc" : "desc",
+      },
       include: {
         role: true,
       },
     });
 
+    const totalMembers = await prisma.member.count({
+      where,
+    });
+
     if (!members) {
       return res.status(404).json({ message: "Members not found" });
     }
-    res.status(200).json({ members });
+
+    res.status(200).json({
+      members,
+      totalMembers,
+      totalPages: Math.ceil(totalMembers / pageSize),
+      currentPage: pageNumber,
+    });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "something went wrong" });
