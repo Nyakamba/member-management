@@ -1,4 +1,4 @@
-import prsma from "../db.js";
+import { prisma } from "../db.js";
 
 export const getStats = async (req, res) => {
   try {
