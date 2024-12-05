@@ -3,7 +3,13 @@ import multer from "multer";
 import path from "path";
 import { verifyToken } from "../middlware/auth.js";
 import isAdmin from "../middlware/admin.js";
-import { addMember } from "../controllers/members.js";
+import {
+  addMember,
+  getMembers,
+  updateMember,
+  deleteMember,
+  getMember,
+} from "../controllers/members.js";
 
 const router = express.Router();
 
@@ -18,7 +24,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-//router.get("/", verifyToken, getMembers);
+router.get("/", verifyToken, getMembers);
 
 router.post(
   "/create",
@@ -28,10 +34,16 @@ router.post(
   addMember
 );
 
-//router.put("/", verifyToken, isAdmin, updateMember);
+router.put(
+  "/:id",
+  verifyToken,
+  isAdmin,
+  upload.single("profilePicture"),
+  updateMember
+);
 
-//router.delete("/", verifyToken, isAdmin, deleteMember);
+router.delete("/:id", verifyToken, isAdmin, deleteMember);
 
-//router.get("/:id", verifyToken, getMember);
+router.get("/:id", verifyToken, getMember);
 
 export default router;
