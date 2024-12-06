@@ -32,3 +32,9 @@ export const validateToken = async () => {
 export const signOut = async () => {
   await axiosInstance.post(`/api/auth/logout`);
 };
+
+export const addMember = async (formData: FormData) => {
+  const response = await axiosInstance.post("/api/members", formData);
+
+  return response.data;
+};

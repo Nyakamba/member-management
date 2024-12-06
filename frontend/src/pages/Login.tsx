@@ -50,11 +50,12 @@ const Login = () => {
   return (
     <form className="flex flex-col gap-5 w-[50%]" onSubmit={onSubmit}>
       <h2 className="text-3xl font-bold">Login</h2>
-      <label className="text-gray-700 text-sm font-bold flex-1">
+      <label className="text-gray-700 text-md font-bold flex-1">
         Email
         <input
           type="email"
-          className="border rounded w-full py-1 px-2 font-normal"
+          placeholder="Enter email"
+          className="border rounded w-full py-2 px-2 font-normal"
           {...register("email", { required: "This field is required" })}
         />
         {errors.email && (
@@ -62,11 +63,12 @@ const Login = () => {
         )}
       </label>
 
-      <label className="text-gray-700 text-sm font-bold flex-1">
+      <label className="text-gray-700 text-md font-bold flex-1">
         Password
         <input
           type="password"
-          className="border rounded w-full py-1 px-2 font-normal"
+          placeholder="Enter Password"
+          className="border rounded w-full py-2 px-2 font-normal"
           {...register("password", {
             required: "This field is required",
             minLength: {
@@ -82,13 +84,13 @@ const Login = () => {
       <span className="flex items-center justify-between ">
         <span className="text-sm">
           Not Registered?
-          <Link className="underline" to="/register">
-            Create an account here
+          <Link className="ml-2 underline" to="/register">
+            Create account here
           </Link>
         </span>
         <Button
           type="submit"
-          className="bg-blue-600 text-white p-2 font-bold hover:bg-blue-500 text-xl"
+          className="bg-blue-600 text-white p-2 font-bold hover:bg-blue-500 text-lg"
         >
           Login
         </Button>

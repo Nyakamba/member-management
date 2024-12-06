@@ -53,18 +53,10 @@ function App() {
               }
             />
             <Route
-              path="/members"
+              path="/add-member"
               element={
                 <Layout>
                   <AddMember />
-                </Layout>
-              }
-            />{" "}
-            <Route
-              path="/add-members"
-              element={
-                <Layout>
-                  <Members />
                 </Layout>
               }
             />{" "}
