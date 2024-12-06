@@ -78,7 +78,7 @@ export const addMember = async (req, res) => {
       data: {
         name,
         email,
-        dob: dob ? new Date(dob) : undefined,
+        dob: dob ? new Date(dob).toISOString() : undefined,
         roleId: Number(roleId) || 1,
         profilePicture: profilePicture || "car.jpg",
         userId: req.userId,
@@ -130,7 +130,7 @@ export const updateMember = async (req, res) => {
       data: {
         name,
         email,
-        dob: dob ? new Date(dob) : undefined,
+        dob: dob ? new Date(dob).toISOString() : undefined,
         roleId: Number(roleId) || 1,
         profilePicture: profilePicture || "car.jpg",
         userId: req.userId,

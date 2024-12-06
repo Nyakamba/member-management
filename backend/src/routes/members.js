@@ -35,7 +35,7 @@ router.post(
 );
 
 router.put(
-  "/:id",
+  "/update/:id",
   verifyToken,
   isAdmin,
   upload.single("profilePicture"),
