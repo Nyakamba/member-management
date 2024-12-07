@@ -6,15 +6,19 @@ import {
 } from "react-router-dom";
 import { useAppContext } from "./context/AppContext";
 import Layout from "./layout/Layout";
-import Dashboard from "./pages/Dashboard";
-import Members from "./pages/Members";
 import AddMember from "./pages/AddMember";
-import Register from "./pages/Register";
-import Login from "./pages/Login";
+import Dashboard from "./pages/Dashboard";
 import EditMember from "./pages/EditMember";
+import Login from "./pages/Login";
+import Members from "./pages/Members";
+import Register from "./pages/Register";
 
 function App() {
-  const { isLoggedIn, isAdmin } = useAppContext();
+  const { isLoggedIn, isAdmin, isAuthLoading } = useAppContext();
+
+  if (isAuthLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <Router>
@@ -37,7 +41,7 @@ function App() {
         />
         {isLoggedIn && (
           <>
-            {isAdmin ? (
+            {isAdmin && (
               <Route
                 path="/dashboard"
                 element={
@@ -46,8 +50,6 @@ function App() {
                   </Layout>
                 }
               />
-            ) : (
-              "/members"
             )}
             <Route
               path="/members"
