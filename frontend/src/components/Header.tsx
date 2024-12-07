@@ -10,7 +10,7 @@ const Header = () => {
     <div className="bg-blue-800 py-6 sticky top-0">
       <div className="container mx-auto flex justify-between">
         <span className="text-3xl text-white font-bold tracking-tight">
-          <NavLink to={"/"}>Members Management</NavLink>
+          <NavLink to={"/members"}>Members Management</NavLink>
         </span>
         <span className="flex space-x-10">
           {isLoggedIn ? (

@@ -1,8 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { useQuery } from "@tanstack/react-query";
-import { useForm } from "react-hook-form";
-import * as apiClient from "../api/apiClient";
 import { useEffect } from "react";
+import { useForm } from "react-hook-form";
 
 type MemberFormData = {
   name: string;
@@ -13,30 +11,34 @@ type MemberFormData = {
 };
 
 type Props = {
-  memberId?: string;
+  member: MemberFormData;
   onSave: (memberFormData: FormData) => void;
   isLoading: boolean;
 };
 
-const MemberForm = ({ memberId, onSave, isLoading }: Props) => {
+const MemberForm = ({ member, onSave, isLoading }: Props) => {
   const {
     handleSubmit,
-    reset,
+    setValue,
     register,
     formState: { errors },
-  } = useForm<MemberFormData>();
-
-  const { data: member } = useQuery({
-    queryKey: ["getmemberById", memberId],
-    queryFn: () => apiClient.getMemberById(memberId!),
-    enabled: !!memberId,
+  } = useForm<MemberFormData>({
+    defaultValues: {
+      name: member?.name,
+      email: member?.email,
+      dob: member?.dob,
+      roleId: member?.roleId,
+      profilePicture: undefined,
+    },
   });
 
   useEffect(() => {
-    if (member) {
-      reset(member);
-    }
-  }, [member, reset]);
+    setValue("name", member?.name);
+    setValue("email", member?.email);
+    setValue("dob", member?.dob);
+    setValue("roleId", member?.roleId);
+    setValue("profilePicture", undefined);
+  }, [member, setValue]);
 
   const onSubmit = handleSubmit((data: MemberFormData) => {
     const formData = new FormData();
@@ -99,8 +101,8 @@ const MemberForm = ({ memberId, onSave, isLoading }: Props) => {
           <option value="" disabled>
             Select Role
           </option>
-          <option value="2">Admin</option>
-          <option value="1">User</option>
+          <option value="1">Admin</option>
+          <option value="2">User</option>
         </select>
         {errors.roleId && (
           <p className="text-red-500">{errors.roleId.message}</p>

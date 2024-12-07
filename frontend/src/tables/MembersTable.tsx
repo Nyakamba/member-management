@@ -76,7 +76,7 @@ const MembersTable = () => {
             <SearchIcon className="absolute right-2 top-2 transform  z-10 text-gray-600" />
           </div>
           {isAdmin && (
-            <Button className="bg-green-700 text-white p-2 font-bold hover:bg-blue-500 text-sm self-end">
+            <Button className="bg-green-700 text-white p-2 font-bold hover:bg-green-600 text-sm self-end">
               <Link to="/add-member">Add Member</Link>
             </Button>
           )}
@@ -85,7 +85,7 @@ const MembersTable = () => {
       {/* Table for Members */}
       <table className="table-auto  w-full rounded] mb-4">
         <thead className="">
-          <tr>
+          <tr className="bg-gray-200 text-green-600">
             <th
               className="border border-gray-300 px-4 py-2 text-left cursor-pointer"
               onClick={() => handleSortChange("name")}
@@ -105,10 +105,10 @@ const MembersTable = () => {
             </th>
             <th className="border border-gray-300 px-4 py-2 text-left">Role</th>
             <th className="border border-gray-300 px-4 py-2 text-left hidden lg:table-cell ">
-              Profile Picture
+              Profile
             </th>
             {isAdmin && (
-              <th className="border border-gray-300 px-4 py-2 text-left">
+              <th className="border border-gray-300 px-4 py-2 text-center">
                 Actions
               </th>
             )}
@@ -116,7 +116,7 @@ const MembersTable = () => {
         </thead>
         <tbody>
           {data?.members.map((member: Member) => (
-            <tr key={member.id} className="">
+            <tr key={member.id} className="hover:bg-gray-100 ">
               <td className="border border-gray-300 px-4 py-2 text-left ">
                 {member.name}
               </td>
@@ -137,7 +137,7 @@ const MembersTable = () => {
                 />
               </td>
               {isAdmin && (
-                <td className="border border-gray-300 text-center   py-4 px-1 md:px-0">
+                <td className="border border-gray-300 text-center   py-4 px-1 md:px-0 hover:cursor-pointer">
                   <Button
                     size={"sm"}
                     className="text-white bg-green-500 hover:bg-green-600 "
