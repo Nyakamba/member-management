@@ -44,8 +44,15 @@ export const addMember = async (formData: FormData) => {
   return response.data;
 };
 
-export const getMembers = async () => {
-  const response = await axiosInstance.get("/api/members");
+export const getMembers = async (
+  search: string,
+  page: number,
+  sortField: string,
+  sortOrder: string
+) => {
+  const response = await axiosInstance.get(`/api/members`, {
+    params: { search, page, sortField, sortOrder },
+  });
 
   return response.data;
 };
@@ -65,7 +72,7 @@ export const editMember = async (id: string, formData: FormData) => {
   return response.data;
 };
 
-export const deleteMember = async (id: string) => {
+export const deleteMember = async (id: number) => {
   const response = await axiosInstance.delete(`/api/members/delete/${id}`);
 
   return response.data;

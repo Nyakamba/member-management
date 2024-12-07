@@ -34,7 +34,7 @@ export const AppContextProvider = ({
     <AppContext.Provider
       value={{
         showToast: setToastMessage,
-        isLoggedIn: !isError || !isLoading,
+        isLoggedIn: !isError,
         isAdmin: data?.role === "admin",
         isAuthLoading: isLoading,
       }}

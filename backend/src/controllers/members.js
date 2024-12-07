@@ -4,7 +4,7 @@ export const getMembers = async (req, res) => {
   const {
     search,
     page = 1,
-    limit = 10,
+    limit = 5,
     sortField = "name",
     sortOrder = "asc",
   } = req.query;
@@ -15,10 +15,7 @@ export const getMembers = async (req, res) => {
 
     const where = search
       ? {
-          OR: [
-            { name: { contains: search, mode: "insensitive" } },
-            { email: { contains: search, mode: "insensitive" } },
-          ],
+          OR: [{ name: { contains: search } }, { email: { contains: search } }],
         }
       : {};
 

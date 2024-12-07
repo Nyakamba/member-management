@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { useAppContext } from "@/context/AppContext";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import * as apiClient from "../api/apiClient";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Button } from "@/components/ui/button";
 
@@ -14,10 +14,7 @@ export type LoginFormData = {
 const Login = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
-  const location = useLocation();
   const { showToast } = useAppContext();
-
-  const { isAdmin } = useAppContext();
 
   const {
     register,
@@ -30,9 +27,7 @@ const Login = () => {
     onSuccess: async () => {
       showToast({ message: "Sign in Success", type: "SUCCESS" });
       await queryClient.invalidateQueries({ queryKey: ["validateToken"] });
-      navigate(
-        location.state?.from?.pathname || isAdmin ? "/dashboard" : "/members"
-      );
+      navigate("/members");
     },
 
     onError: (error) => {

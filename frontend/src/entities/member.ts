@@ -4,5 +4,6 @@ export interface Member {
   email: string;
   dob: string;
   roleId: number;
-  profilePicture?: FileList;
+  role: { name: string };
+  profilePicture?: string;
 }

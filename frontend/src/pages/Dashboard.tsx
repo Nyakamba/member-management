@@ -1,10 +1,11 @@
 import Stats from "@/components/Stats";
-import React from "react";
+import MembersTable from "@/tables/MembersTable";
 
 const Dashboard = () => {
   return (
-    <div>
+    <div className="px-2  w-full flex flex-col items-center justify-center ">
       <Stats />
+      <MembersTable />
     </div>
   );
 };
