@@ -11,6 +11,7 @@ import { Member } from "@/entities/member";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { useAppContext } from "@/context/AppContext";
+import avater from "../assets/avater.png";
 
 const MembersTable = () => {
   const { isAdmin } = useAppContext();
@@ -103,7 +104,7 @@ const MembersTable = () => {
               Date of Birth
             </th>
             <th className="border border-gray-300 px-4 py-2 text-left">Role</th>
-            <th className="border border-gray-300 px-4 py-2 text-left hidden lg:table-cell">
+            <th className="border border-gray-300 px-4 py-2 text-left hidden lg:table-cell ">
               Profile Picture
             </th>
             {isAdmin && (
@@ -128,11 +129,11 @@ const MembersTable = () => {
               <td className="border border-gray-300 px-4 py-2 text-left">
                 {member.role.name}
               </td>
-              <td className="border  border-gray-300 px-4 py-2 text-left hidden lg:table-cell">
+              <td className="border  border-gray-300 px-4 py-2 hidden lg:table-cell text-center">
                 <img
-                  src={member.profilePicture || "default.jpg"}
+                  src={member.profilePicture || `${avater}`}
                   alt="Profile"
-                  className="w-12 h-12 rounded-full"
+                  className="w-10 h-10 object-cover  rounded-full"
                 />
               </td>
               {isAdmin && (
