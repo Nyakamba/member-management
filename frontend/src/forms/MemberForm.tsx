@@ -109,6 +109,7 @@ const MemberForm = ({ member, onSave, isLoading }: Props) => {
         )}
       </label>
       <label className="text-gray-700 text-sm font-bold flex-1">
+        Profile Picture
         <input
           type="file"
           {...register("profilePicture")}
