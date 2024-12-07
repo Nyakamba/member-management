@@ -9,6 +9,11 @@ export const axiosInstance = axios.create({
   withCredentials: true,
 });
 
+export const getMe = async () => {
+  const response = await axiosInstance.get("/api/auth/me");
+  return response.data;
+};
+
 export const register = async (formData: RegisterFormData) => {
   const response = await axiosInstance.post("/api/auth/register", formData);
 
@@ -34,7 +39,40 @@ export const signOut = async () => {
 };
 
 export const addMember = async (formData: FormData) => {
-  const response = await axiosInstance.post("/api/members", formData);
+  const response = await axiosInstance.post("/api/members/create", formData);
+
+  return response.data;
+};
+
+export const getMembers = async () => {
+  const response = await axiosInstance.get("/api/members");
+
+  return response.data;
+};
+
+export const getMemberById = async (memberId: string) => {
+  const response = await axiosInstance.get(`api/members/${memberId}`);
+
+  return response.data;
+};
+
+export const editMember = async (id: string, formData: FormData) => {
+  const response = await axiosInstance.put(
+    `/api/members/update/${id}`,
+    formData
+  );
+
+  return response.data;
+};
+
+export const deleteMember = async (id: string) => {
+  const response = await axiosInstance.delete(`/api/members/delete/${id}`);
+
+  return response.data;
+};
+
+export const getMemberStats = async () => {
+  const response = await axiosInstance.get(`/api/stats`);
 
   return response.data;
 };

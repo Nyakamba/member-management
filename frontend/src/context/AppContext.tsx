@@ -11,6 +11,7 @@ type ToastMessage = {
 interface AppContext {
   showToast: (message: ToastMessage) => void;
   isLoggedIn: boolean;
+  isAdmin: boolean;
 }
 
 const AppContext = createContext<AppContext | undefined>(undefined);
@@ -22,7 +23,7 @@ export const AppContextProvider = ({
 }) => {
   const [toastMessage, setToastMessage] = useState<ToastMessage | null>(null);
 
-  const { isError } = useQuery({
+  const { data, isError } = useQuery({
     queryKey: ["validateToken"],
     queryFn: apiClient.validateToken,
     retry: false,
@@ -30,7 +31,11 @@ export const AppContextProvider = ({
 
   return (
     <AppContext.Provider
-      value={{ showToast: setToastMessage, isLoggedIn: !isError }}
+      value={{
+        showToast: setToastMessage,
+        isLoggedIn: !isError,
+        isAdmin: data?.role === "admin",
+      }}
     >
       {toastMessage && (
         <Toast

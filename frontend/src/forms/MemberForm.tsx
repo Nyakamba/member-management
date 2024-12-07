@@ -1,7 +1,8 @@
 import { Button } from "@/components/ui/button";
-import { Member } from "@/entities/member";
-import { useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
+import * as apiClient from "../api/apiClient";
+import { useEffect } from "react";
 
 type MemberFormData = {
   name: string;
@@ -12,18 +13,24 @@ type MemberFormData = {
 };
 
 type Props = {
-  member?: Member;
+  memberId?: string;
   onSave: (memberFormData: FormData) => void;
   isLoading: boolean;
 };
 
-const MemberForm = ({ member, onSave, isLoading }: Props) => {
+const MemberForm = ({ memberId, onSave, isLoading }: Props) => {
   const {
     handleSubmit,
     reset,
     register,
     formState: { errors },
   } = useForm<MemberFormData>();
+
+  const { data: member } = useQuery({
+    queryKey: ["getmemberById", memberId],
+    queryFn: () => apiClient.getMemberById(memberId!),
+    enabled: !!memberId,
+  });
 
   useEffect(() => {
     if (member) {
@@ -33,10 +40,6 @@ const MemberForm = ({ member, onSave, isLoading }: Props) => {
 
   const onSubmit = handleSubmit((data: MemberFormData) => {
     const formData = new FormData();
-
-    if (member) {
-      formData.append("memberId", member.id.toString());
-    }
 
     formData.append("name", data.name);
     formData.append("email", data.email);
@@ -92,7 +95,6 @@ const MemberForm = ({ member, onSave, isLoading }: Props) => {
         <select
           {...register("roleId", { required: "Role is required" })}
           className="border rounded w-full py-2 px-2 font-normal cursor-pointer"
-          defaultValue={1}
         >
           <option value="" disabled>
             Select Role

@@ -4,7 +4,7 @@ import SignOutButton from "./SignOutButton";
 import { Button } from "./ui/button";
 
 const Header = () => {
-  const { isLoggedIn } = useAppContext();
+  const { isLoggedIn, isAdmin } = useAppContext();
 
   return (
     <div className="bg-blue-800 py-6 sticky top-0">
@@ -15,18 +15,20 @@ const Header = () => {
         <span className="flex space-x-10">
           {isLoggedIn ? (
             <>
-              <NavLink
-                className={({ isActive }) =>
-                  `flex items-center text-white px-3 font-bold rounded-md ${
-                    isActive
-                      ? "bg-blue-600 hover:bg-blue-800"
-                      : "hover:bg-blue-600"
-                  }`
-                }
-                to={"/dashboard"}
-              >
-                Dashboard
-              </NavLink>
+              {isAdmin && (
+                <NavLink
+                  className={({ isActive }) =>
+                    `flex items-center text-white px-3 font-bold rounded-md ${
+                      isActive
+                        ? "bg-blue-600 hover:bg-blue-800"
+                        : "hover:bg-blue-600"
+                    }`
+                  }
+                  to={"/dashboard"}
+                >
+                  Dashboard
+                </NavLink>
+              )}
               <NavLink
                 className={({ isActive }) =>
                   `flex items-center text-white px-3 font-bold rounded-md ${

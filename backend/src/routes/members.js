@@ -42,7 +42,7 @@ router.put(
   updateMember
 );
 
-router.delete("/:id", verifyToken, isAdmin, deleteMember);
+router.delete("/delete/:id", verifyToken, isAdmin, deleteMember);
 
 router.get("/:id", verifyToken, getMember);
 

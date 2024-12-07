@@ -123,7 +123,7 @@ const login = async (req, res) => {
 };
 
 const validateToken = async (req, res) => {
-  res.status(200).send({ userId: req.userId });
+  res.status(200).send({ userId: req.userId, role: req.role });
 };
 
 //user logout

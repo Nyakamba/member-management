@@ -11,9 +11,10 @@ import Members from "./pages/Members";
 import AddMember from "./pages/AddMember";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
+import EditMember from "./pages/EditMember";
 
 function App() {
-  const { isLoggedIn } = useAppContext();
+  const { isLoggedIn, isAdmin } = useAppContext();
 
   return (
     <Router>
@@ -36,14 +37,18 @@ function App() {
         />
         {isLoggedIn && (
           <>
-            <Route
-              path="/dashboard"
-              element={
-                <Layout>
-                  <Dashboard />
-                </Layout>
-              }
-            />
+            {isAdmin ? (
+              <Route
+                path="/dashboard"
+                element={
+                  <Layout>
+                    <Dashboard />
+                  </Layout>
+                }
+              />
+            ) : (
+              "/members"
+            )}
             <Route
               path="/members"
               element={
@@ -64,7 +69,7 @@ function App() {
               path="/edit-member/:memberId"
               element={
                 <Layout>
-                  <Members />
+                  <EditMember />
                 </Layout>
               }
             />

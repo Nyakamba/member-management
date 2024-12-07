@@ -28,7 +28,7 @@ const Register = () => {
     onSuccess: async () => {
       showToast({ message: "Registration Success!", type: "SUCCESS" });
       await queryClient.invalidateQueries({ queryKey: ["validateToken"] });
-      navigate("/dashboard");
+      navigate("/members");
     },
     onError: (error) => {
       if (axios.isAxiosError(error) && error.response?.data?.message) {
@@ -53,7 +53,7 @@ const Register = () => {
         Email
         <input
           type="email"
-           placeholder="Enter email"
+          placeholder="Enter email"
           className="border rounded w-full py-2 px-2 font-normal"
           {...register("email", { required: "This field is required" })}
         />
@@ -66,7 +66,7 @@ const Register = () => {
         Password
         <input
           type="password"
-           placeholder="Enter Password"
+          placeholder="Enter Password"
           className="border rounded w-full py-2 px-2 font-normal"
           {...register("password", {
             required: "This field is required",
@@ -84,7 +84,7 @@ const Register = () => {
         Confirm Password
         <input
           type="password"
-           placeholder="Enter Password"
+          placeholder="Enter Password"
           className="border rounded w-full py-2 px-2 font-normal"
           {...register("confirmPassword", {
             validate: (val) => {

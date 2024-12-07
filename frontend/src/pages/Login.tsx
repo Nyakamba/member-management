@@ -17,6 +17,8 @@ const Login = () => {
   const location = useLocation();
   const { showToast } = useAppContext();
 
+  const { isAdmin } = useAppContext();
+
   const {
     register,
     handleSubmit,
@@ -28,7 +30,9 @@ const Login = () => {
     onSuccess: async () => {
       showToast({ message: "Sign in Success", type: "SUCCESS" });
       await queryClient.invalidateQueries({ queryKey: ["validateToken"] });
-      navigate(location.state?.from?.pathname || "/dashboard");
+      navigate(
+        location.state?.from?.pathname || isAdmin ? "/dashboard" : "/members"
+      );
     },
 
     onError: (error) => {

@@ -1,16 +1,21 @@
 import MemberForm from "@/forms/MemberForm";
 import * as apiClient from "../api/apiClient";
 import { useAppContext } from "@/context/AppContext";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const AddMember = () => {
   const { showToast } = useAppContext();
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   const { mutate, isPending } = useMutation({
     mutationFn: apiClient.addMember,
     onSuccess: () => {
       showToast({ message: "Member added successfully", type: "SUCCESS" });
+      queryClient.invalidateQueries({ queryKey: ["members", "memberStats"] });
+      navigate("/dashboard");
     },
     onError: (error) => {
       if (axios.isAxiosError(error) && error.response?.data?.message) {
