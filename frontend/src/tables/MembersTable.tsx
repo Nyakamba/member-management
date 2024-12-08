@@ -73,7 +73,7 @@ const MembersTable = () => {
               onChange={handleSearchChange}
               className="border border-gray-400 focus:outline-none hover:bg-gray-200 transition-colors ease-in delay-100  p-2 pr-10 rounded-full px-4 text-sm focus:bg-white "
             />
-            <SearchIcon className="absolute right-2 top-2 transform  z-10 text-gray-600" />
+            <SearchIcon className="absolute right-2 top-2 transform   text-gray-600" />
           </div>
           {isAdmin && (
             <Button className="bg-green-700 text-white p-2 font-bold hover:bg-green-600 text-sm self-end">

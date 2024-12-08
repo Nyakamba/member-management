@@ -41,7 +41,11 @@ const EditMember = () => {
   return (
     <div className="p-8  w-full flex flex-col items-center justify-center">
       <h1 className="text-3xl font-bold mb-6">Edit Member</h1>
-      <MemberForm member={member} onSave={handleSave} isLoading={isPending} />
+      <MemberForm
+        member={member.member}
+        onSave={handleSave}
+        isLoading={isPending}
+      />
     </div>
   );
 };

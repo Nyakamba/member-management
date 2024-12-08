@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { useEffect } from "react";
+import { Member } from "@/entities/member";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
 type MemberFormData = {
@@ -11,41 +12,42 @@ type MemberFormData = {
 };
 
 type Props = {
-  member: MemberFormData;
+  member?: Member;
   onSave: (memberFormData: FormData) => void;
   isLoading: boolean;
 };
 
 const MemberForm = ({ member, onSave, isLoading }: Props) => {
+  const [preview, setPreview] = useState<string | null>(null);
+
   const {
     handleSubmit,
-    setValue,
+    reset,
+    watch,
     register,
     formState: { errors },
-  } = useForm<MemberFormData>({
-    defaultValues: {
-      name: member?.name,
-      email: member?.email,
-      dob: member?.dob,
-      roleId: member?.roleId,
-      profilePicture: undefined,
-    },
-  });
+  } = useForm<MemberFormData>();
+
+  const profilePicture = watch("profilePicture");
 
   useEffect(() => {
-    setValue("name", member?.name);
-    setValue("email", member?.email);
-    setValue("dob", member?.dob);
-    setValue("roleId", member?.roleId);
-    setValue("profilePicture", undefined);
-  }, [member, setValue]);
+    reset({
+      name: member?.name,
+      email: member?.email,
+      dob: member?.dob.split("T")[0],
+      roleId: member?.roleId,
+    });
+
+    setPreview(member?.profilePicture || null);
+  }, [member, reset]);
 
   const onSubmit = handleSubmit((data: MemberFormData) => {
+    console.log(data);
     const formData = new FormData();
 
     formData.append("name", data.name);
     formData.append("email", data.email);
-    formData.append("dob", data.dob);
+    formData.append("dob", data.dob.split("T")[0]);
     formData.append("roleId", data.roleId.toString());
 
     if (data.profilePicture) {
@@ -54,6 +56,20 @@ const MemberForm = ({ member, onSave, isLoading }: Props) => {
 
     onSave(formData);
   });
+
+  useEffect(() => {
+    if (profilePicture && profilePicture.length > 0) {
+      const file = profilePicture[0];
+      if (file instanceof Blob) {
+        const objectURL = URL.createObjectURL(file);
+        setPreview(objectURL);
+
+        return () => URL.revokeObjectURL(objectURL);
+      }
+    } else {
+      setPreview(null);
+    }
+  }, [profilePicture]);
 
   return (
     <form onSubmit={onSubmit} className="flex flex-col space-y-4 w-[60%]">
@@ -115,6 +131,15 @@ const MemberForm = ({ member, onSave, isLoading }: Props) => {
           {...register("profilePicture")}
           className="border rounded w-full py-2 px-2 font-normal cursor-pointer"
         />
+        {preview && (
+          <div className="mt-2">
+            <img
+              src={preview}
+              alt="Preview"
+              className="w-24 h-24 rounded-full"
+            />
+          </div>
+        )}
       </label>
 
       <Button
