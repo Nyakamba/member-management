@@ -7,8 +7,12 @@ import memberRoutes from "./routes/members.js";
 import activityRoutes from "./routes/activity.js";
 import statsRoutes from "./routes/stats.js";
 import path from "path";
+import { fileURLToPath } from "url";
 
 const app = express();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 app.use(cookieParser());
 app.use(express.json());

@@ -8,7 +8,7 @@ type MemberFormData = {
   email: string;
   dob: string;
   roleId: number;
-  profilePicture?: FileList;
+  profilePicture?: FileList | string;
 };
 
 type Props = {
@@ -31,11 +31,13 @@ const MemberForm = ({ member, onSave, isLoading }: Props) => {
   const profilePicture = watch("profilePicture");
 
   useEffect(() => {
+    console.log(member?.profilePicture);
     reset({
       name: member?.name,
       email: member?.email,
       dob: member?.dob.split("T")[0],
       roleId: member?.roleId,
+      profilePicture: member?.profilePicture,
     });
 
     setPreview(member?.profilePicture || null);
