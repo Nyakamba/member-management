@@ -31,7 +31,6 @@ const MemberForm = ({ member, onSave, isLoading }: Props) => {
   const profilePicture = watch("profilePicture");
 
   useEffect(() => {
-    console.log(member?.profilePicture);
     reset({
       name: member?.name,
       email: member?.email,
@@ -40,7 +39,7 @@ const MemberForm = ({ member, onSave, isLoading }: Props) => {
       profilePicture: member?.profilePicture,
     });
 
-    setPreview(member?.profilePicture || null);
+    setPreview(member?.profilePicture as string);
   }, [member, reset]);
 
   const onSubmit = handleSubmit((data: MemberFormData) => {
@@ -134,11 +133,11 @@ const MemberForm = ({ member, onSave, isLoading }: Props) => {
           className="border rounded w-full py-2 px-2 font-normal cursor-pointer"
         />
         {preview && (
-          <div className="mt-2">
+          <div className="mt-2 cursor-pointer">
             <img
               src={preview}
               alt="Preview"
-              className="w-24 h-24 rounded-full"
+              className="w-10 object-cover h-10 rounded-full"
             />
           </div>
         )}
