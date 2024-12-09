@@ -34,8 +34,7 @@ const AddMember = () => {
   };
 
   return (
-    <div className="p-8  w-full flex flex-col items-center justify-center">
-      <h1 className="text-3xl font-bold mb-6">Add Member</h1>
+    <div className="bg-[#F5F2EB]  w-full flex flex-col items-center justify-center p-4 min-h-screen">
       <MemberForm onSave={handleSave} isLoading={isPending} />
     </div>
   );

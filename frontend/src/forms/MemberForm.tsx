@@ -75,8 +75,17 @@ const MemberForm = ({ member, onSave, isLoading }: Props) => {
   return (
     <form
       onSubmit={onSubmit}
-      className="flex  flex-col gap-5  sm:w-[40%] lg:w-[28%] bg-white rounded-xl shadow p-8 sm:p-10"
+      className="flex  flex-col gap-5  sm:w-[40%] lg:w-[44%] bg-gray-100 rounded-xl shadow p-6 sm:p-10 "
     >
+      {member ? (
+        <h1 className="text-2xl text-center font-bold text-gray-700 mb-5">
+          Update Member
+        </h1>
+      ) : (
+        <h1 className="text-2xl text-center font-bold text-gray-700 mb-5">
+          Add Member
+        </h1>
+      )}
       <label className="text-gray-700 text-md  flex-1">
         Name
         <input
@@ -146,7 +155,7 @@ const MemberForm = ({ member, onSave, isLoading }: Props) => {
 
       <Button
         type="submit"
-        className="bg-green-400 text-white p-2 font-bold hover:bg-green-300 text-lg"
+        className="border border-green-400 bg-white p-2  hover:bg-green-300  lg:w-[50%] self-center"
         disabled={isLoading}
       >
         {isLoading ? "Saving..." : member ? "Update Member" : "Add Member"}

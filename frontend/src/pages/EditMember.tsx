@@ -39,8 +39,7 @@ const EditMember = () => {
   }
 
   return (
-    <div className="p-8  w-full flex flex-col items-center justify-center">
-      <h1 className="text-3xl font-bold mb-6">Edit Member</h1>
+    <div className="bg-[#F5F2EB]  w-full flex flex-col items-center justify-center p-4 min-h-screen">
       <MemberForm
         member={member.member}
         onSave={handleSave}
