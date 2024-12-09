@@ -9,7 +9,7 @@ const Stats = () => {
   if (isLoading) return <div>Loading statistics...</div>;
 
   return (
-    <div className="flex justify-between items-center w-full gap-4 md:gap-20">
+    <div className="container mx-auto flex justify-between items-center w-full gap-4 md:gap-20">
       <div className="grid grid-cols-3 gap-4 md:gap-20 xl:gap-40">
         <div className=" bg-blue-100  flex flex-col justify-center items-center rounded-xl text-sm p-4 font-bold">
           <p>Total Members</p>

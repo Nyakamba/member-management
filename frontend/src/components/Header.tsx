@@ -7,21 +7,21 @@ const Header = () => {
   const { isLoggedIn, isAdmin } = useAppContext();
 
   return (
-    <div className="bg-blue-800 py-6 z-20 sticky top-0">
-      <div className="container mx-auto flex justify-between">
-        <span className="text-3xl text-white font-bold tracking-tight">
-          <NavLink to={"/members"}>Members Management</NavLink>
-        </span>
-        <span className="flex space-x-10">
+    <div className="bg-green-800  p-4 shadow-lg z-20 sticky top-0 w-full">
+      <div className="flex justify-between">
+        <div className="text-3xl text-white font-bold tracking-tight">
+          <NavLink to={"/members"}>Members</NavLink>
+        </div>
+        <div className="flex space-x-10">
           {isLoggedIn ? (
             <>
               {isAdmin && (
                 <NavLink
                   className={({ isActive }) =>
-                    `flex items-center text-white px-3 font-bold rounded-md ${
+                    ` items-center text-white px-3 font-bold rounded-md hidden sm:flex ${
                       isActive
-                        ? "bg-blue-600 hover:bg-blue-800"
-                        : "hover:bg-blue-600"
+                        ? "bg-green-600 hover:bg-green-800"
+                        : "hover:bg-green-600"
                     }`
                   }
                   to={"/dashboard"}
@@ -31,10 +31,10 @@ const Header = () => {
               )}
               <NavLink
                 className={({ isActive }) =>
-                  `flex items-center text-white px-3 font-bold rounded-md ${
+                  ` items-center text-white  px-3 font-bold rounded-md hidden sm:flex ${
                     isActive
-                      ? "bg-blue-600 hover:bg-blue-800"
-                      : "hover:bg-blue-600"
+                      ? "bg-green-600 hover:bg-green-800"
+                      : "hover:bg-green-600"
                   }`
                 }
                 to={"/members"}
@@ -44,11 +44,11 @@ const Header = () => {
               <SignOutButton />
             </>
           ) : (
-            <Button className="flex items-center bg-white text-lg text-blue-600 px-4 font-bold hover:bg-gray-200">
-              <NavLink to={"/sign-in"}>Login</NavLink>
+            <Button className="hidden sm:flex bg-white text-md  px-3  hover:bg-gray-200">
+              <NavLink to={"/sign-in"}>Sign In</NavLink>
             </Button>
           )}
-        </span>
+        </div>
       </div>
     </div>
   );

@@ -73,18 +73,21 @@ const MemberForm = ({ member, onSave, isLoading }: Props) => {
   }, [profilePicture]);
 
   return (
-    <form onSubmit={onSubmit} className="flex flex-col space-y-4 w-[60%]">
-      <label className="text-gray-700 text-sm font-bold flex-1">
+    <form
+      onSubmit={onSubmit}
+      className="flex  flex-col gap-5  sm:w-[40%] lg:w-[28%] bg-white rounded-xl shadow p-8 sm:p-10"
+    >
+      <label className="text-gray-700 text-md  flex-1">
         Name
         <input
           type="text"
           {...register("name", { required: "Name is required" })}
           placeholder="Name"
-          className="border rounded w-full py-2 px-2 font-normal"
+          className="border border-gray-400 rounded-lg w-full py-2 px-2 font-normal"
         />
         {errors.name && <p className="text-red-500">{errors.name.message}</p>}
       </label>
-      <label className="text-gray-700 text-sm font-bold flex-1">
+      <label className="text-gray-700 text-sm flex-1">
         Email
         <input
           type="email"
@@ -96,28 +99,26 @@ const MemberForm = ({ member, onSave, isLoading }: Props) => {
             },
           })}
           placeholder="Email"
-          className="border rounded w-full py-2 px-2 font-normal"
+          className="border border-gray-400 rounded-lg w-full py-2 px-2 font-normal"
         />
         {errors.email && <p className="text-red-500">{errors.email.message}</p>}
       </label>
-      <label className="text-gray-700 text-sm font-bold flex-1">
+      <label className="text-gray-700 text-sm  flex-1">
         Date of Birth
         <input
           type="date"
           {...register("dob", { required: "Date of Birth is required" })}
-          className="border rounded w-full py-2 px-2 font-normal cursor-pointer"
+          placeholder="Date of Birth"
+          className="border border-gray-400 rounded-lg w-full py-2 px-2 font-normal cursor-pointer"
         />
         {errors.dob && <p className="text-red-500">{errors.dob.message}</p>}
       </label>
-      <label className="text-gray-700 text-sm font-bold flex-1">
+      <label className="text-gray-700 text-sm flex-1">
         Select Role
         <select
           {...register("roleId", { required: "Role is required" })}
-          className="border rounded w-full py-2 px-2 font-normal cursor-pointer"
+          className="border border-gray-400 rounded-lg w-full py-2 px-2 font-normal cursor-pointer"
         >
-          <option value="" disabled>
-            Select Role
-          </option>
           <option value="1">Admin</option>
           <option value="2">User</option>
         </select>
@@ -125,12 +126,12 @@ const MemberForm = ({ member, onSave, isLoading }: Props) => {
           <p className="text-red-500">{errors.roleId.message}</p>
         )}
       </label>
-      <label className="text-gray-700 text-sm font-bold flex-1">
+      <label className="text-gray-700 text-sm  flex-1">
         Profile Picture
         <input
           type="file"
           {...register("profilePicture")}
-          className="border rounded w-full py-2 px-2 font-normal cursor-pointer"
+          className="border border-gray-400 rounded-lg w-full py-2 px-2 font-normal cursor-pointer"
         />
         {preview && (
           <div className="mt-2 cursor-pointer">
@@ -145,7 +146,7 @@ const MemberForm = ({ member, onSave, isLoading }: Props) => {
 
       <Button
         type="submit"
-        className="bg-blue-600 text-white p-2 font-bold hover:bg-blue-500 text-lg self-end"
+        className="bg-green-400 text-white p-2 font-bold hover:bg-green-300 text-lg"
         disabled={isLoading}
       >
         {isLoading ? "Saving..." : member ? "Update Member" : "Add Member"}

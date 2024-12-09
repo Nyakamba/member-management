@@ -61,22 +61,25 @@ const MembersTable = () => {
   if (isLoading) return <div>Loading members...</div>;
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto ">
       {/* Search Input */}
       <div className="flex flex-row    items-center space-x-20 mb-2 ">
-        <div className="flex w-full items-center justify-between">
-          <div className="relative">
+        <div className="flex w-full items-center space-x-4 justify-between">
+          <div className="relative ">
             <input
               type="text"
               placeholder="Search members"
               value={data?.search}
               onChange={handleSearchChange}
-              className="border border-gray-400 focus:outline-none hover:bg-gray-200 transition-colors ease-in delay-100  p-2 pr-10 rounded-full px-4 text-sm focus:bg-white "
+              className="border border-gray-400 focus:outline-none hover:bg-gray-200 transition-colors ease-in delay-100  p-2 pr-10 rounded-full px-4 text-sm focus:bg-white w-full"
             />
             <SearchIcon className="absolute right-2 top-2 transform   text-gray-600" />
           </div>
           {isAdmin && (
-            <Button className="bg-green-700 text-white p-2 font-bold hover:bg-green-600 text-sm self-end">
+            <Button
+              // size={"sm"}
+              className="bg-green-700 text-white p-2 font-bold hover:bg-green-600 text-sm self-end   "
+            >
               <Link to="/add-member">Add Member</Link>
             </Button>
           )}
@@ -94,7 +97,7 @@ const MembersTable = () => {
               {sortField === "name" ? (sortOrder === "asc" ? "↑" : "↓") : ""}
             </th>
             <th
-              className="border border-gray-300 px-4 py-2 text-left cursor-pointer"
+              className="border border-gray-300 px-4 py-2 text-left cursor-pointer hidden md:table-cell"
               onClick={() => handleSortChange("email")}
             >
               Email{" "}
@@ -120,7 +123,7 @@ const MembersTable = () => {
               <td className="border border-gray-300 px-4 py-2 text-left ">
                 {member.name}
               </td>
-              <td className="border border-gray-300 px-4 py-2 text-left ">
+              <td className="border border-gray-300 px-4 py-2 text-left hidden md:table-cell">
                 {member.email}
               </td>
               <td className="border border-gray-300 px-4 py-2 text-left hidden lg:table-cell">
@@ -141,7 +144,7 @@ const MembersTable = () => {
                 <td className="border border-gray-300 text-center   py-4 px-1 md:px-0 hover:cursor-pointer">
                   <Button
                     size={"sm"}
-                    className="text-white bg-green-500 hover:bg-green-600 "
+                    className="text-white bg-green-500 hover:bg-green-600 mr-2"
                   >
                     <Link to={`/edit-member/${member.id}`}>Edit</Link>
                   </Button>

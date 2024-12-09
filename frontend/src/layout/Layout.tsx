@@ -3,9 +3,9 @@ import React from "react";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col m-h-screen ">
       <Header />
-      <div className="container  mx-auto py-2 flex flex-col justify-center items-center ">
+      <div className=" w-full mx-auto  flex flex-col border  justify-center items-center min-h-screen ">
         {children}
       </div>
       {/* <Footer /> */}
