@@ -8,7 +8,6 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       <div className=" w-full mx-auto  flex flex-col border  justify-center items-center min-h-screen bg-[#F5F2EB]">
         {children}
       </div>
-      {/* <Footer /> */}
     </div>
   );
 };
