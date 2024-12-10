@@ -1,8 +1,14 @@
-# Use official Node.js image
-FROM node:18
+# Use official Node.js image based on Alpine
+FROM node:18-alpine
 
 # Set the working directory inside the container
 WORKDIR /app
+
+# Install required dependencies (OpenSSL, Bash, etc.)
+RUN apk update && apk add --no-cache \
+  openssl \
+  bash \
+  && rm -rf /var/cache/apk/*
 
 # Copy package.json and package-lock.json for efficient layer caching
 COPY backend/package*.json ./

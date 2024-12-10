@@ -1,5 +1,5 @@
 # Use official Node.js image for frontend
-FROM node:18
+FROM node:18-alpine
 
 # Set the working directory inside the container
 WORKDIR /app
@@ -22,8 +22,10 @@ COPY frontend/ .
 # Build the React app
 RUN npm run build
 
+RUN npm install -g serve
+
 # Expose the port for the frontend
-EXPOSE 5173
+EXPOSE 3000
 
 # Serve the React app (use serve for production)
-CMD ["npx", "serve", "build"]
+CMD ["serve","-s", "dist"]
