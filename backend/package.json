@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "nodemon",
+    "start": "node ./src/index.js",
     "test": "node  --experimental-vm-modules node_modules/jest/bin/jest.js",
     "build": "npm install ",
     "seed": "node  prisma/seed.js"
