@@ -129,7 +129,10 @@ const MemberForm = ({ member, onSave, isLoading }: Props) => {
           className="border border-gray-400 rounded-lg w-full py-2 px-2 font-normal cursor-pointer"
         >
           <option value="1">Admin</option>
-          <option value="2">User</option>
+          <option value="3">Moderator</option>
+          <option value="4">Editor</option>
+          <option value="5">Auditor</option>
+          <option value="6">Guest</option>
         </select>
         {errors.roleId && (
           <p className="text-red-500">{errors.roleId.message}</p>

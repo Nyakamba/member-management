@@ -1,4 +1,15 @@
 import { prisma } from "../db.js";
+
+export const getAllRoles = async (req, res) => {
+  try {
+    const roles = await prisma.role.findMany();
+    res.status(200).json({ roles });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "something went wrong" });
+  }
+};
+
 export const createRole = async (req, res) => {
   const { name } = req.body;
 
