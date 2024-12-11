@@ -193,12 +193,12 @@ cd member-management
 
 ### Dashboard
 
-![Dashboard](src/assets/screenshots/dashboard.png)
-![Dashboard](src/assets/screenshots/dashboard-1.png)
+![Dashboard](/frontend/src/assets/screenshots/dashboard.png)
+![Dashboard](/frontend/src/assets/screenshots/dashboard-1.png)
 
 ### Members List
 
-![Members List](src/assets/screenshots/members-1.png)
+![Members List](/frontend/src/assets/screenshots/members-1.png)
 
 ---
 
