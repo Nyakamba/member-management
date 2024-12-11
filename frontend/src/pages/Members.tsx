@@ -58,7 +58,7 @@ const Members = () => {
         {members?.map((member) => (
           <div
             key={member.id}
-            className="w-full h-[50x] sm:w-[70%] bg-white border border-gray-200 rounded-lg shadow-lg hover:scale-105 hover-shadow-lg p-4 transition-transform duration-300"
+            className="w-full flex flex-col items-center  sm:w-[70%] bg-white border border-gray-200 rounded-lg shadow-lg hover:scale-105 hover-shadow-lg p-4 transition-transform duration-300 space-y-5"
           >
             <img
               className="rounded-lg  object-cover border h-[300px] w-full"
@@ -70,29 +70,25 @@ const Members = () => {
               alt="Profile Photo"
             />
 
-            <div className="p-5">
-              <div className="flex justify-between items-center">
-                <h5 className="mb-2 text-md font-bold tracking-tight text-gray-900">
-                  {member.name}
-                </h5>
-                <p className="text-sm bg-gray-200 p-1 px-2 rounded-md text-gray-900 capitalize">
-                  {member.role.name}
-                </p>
-              </div>
+            <div className="flex px-44 justify-between items-center w-full">
+              <h5 className=" text-md font-bold tracking-tight text-gray-900">
+                {member.name}
+              </h5>
+              <p className="text-sm bg-gray-200 p-1 px-2 rounded-md text-gray-900 capitalize">
+                {member.role.name}
+              </p>
             </div>
+
             {isAdmin && (
-              <div className="flex justify-between gap-2 px-10 ">
+              <div className="flex  justify-between gap-2 w-full  ">
                 <Button className="bg-white border border-green-400 hover:bg-green-400 rounded-lg">
-                  <Link to={`/edit-member/${member.id}`} className="px-8">
+                  <Link to={`/edit-member/${member.id}`} className=" ">
                     Edit
                   </Link>
                 </Button>
 
                 <Button className="bg-white border border-red-500 rounded-lg hover:bg-red-500 flex items-center">
-                  <button
-                    onClick={() => handleDelete(member.id)}
-                    className="px-6"
-                  >
+                  <button onClick={() => handleDelete(member.id)} className="">
                     Delete
                   </button>
                 </Button>
