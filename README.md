@@ -189,7 +189,7 @@ cd member-management
 
 ### Login Page
 
-![Login Page](src/assets/screenshots/login.png)
+![Login Page](/frontend/src/assets/screenshots/login.png)
 
 ### Dashboard
 
