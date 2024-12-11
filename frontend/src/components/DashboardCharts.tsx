@@ -90,7 +90,7 @@ function ActivityLogsPieChart() {
           fill="#36a2eb"
           label
         >
-          {activityLogsData.map((entry: any, index: number) => (
+          {activityLogsData.map((_entry: any, index: number) => (
             <Cell
               key={`cell-${index}`}
               fill={COLORS[index % COLORS.length]}
