@@ -70,7 +70,7 @@ const Members = () => {
               alt="Profile Photo"
             />
 
-            <div className="flex px-44 justify-between items-center w-full">
+            <div className="flex px-4 justify-between items-center w-full">
               <h5 className=" text-md font-bold tracking-tight text-gray-900">
                 {member.name}
               </h5>
