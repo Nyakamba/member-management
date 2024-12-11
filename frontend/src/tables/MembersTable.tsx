@@ -10,7 +10,7 @@ import { Member } from "@/entities/member";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { useAppContext } from "@/context/AppContext";
-import avater from "../assets/avater.png";
+import aviation from "../assets/avation-4823907_640.jpg";
 import ViewMore from "@/components/ViewMore";
 
 const MembersTable = () => {
@@ -19,12 +19,14 @@ const MembersTable = () => {
   const [page, setPage] = useState(1);
   const [sortField, setSortField] = useState("name");
   const [sortOrder, setSortOrder] = useState("asc");
+  const limit = 5;
 
   const queryClient = useQueryClient();
 
   const { data, isLoading, isPlaceholderData } = useQuery({
-    queryKey: ["members", search, page, sortField, sortOrder],
-    queryFn: () => apiClient.getMembers(search, page, sortField, sortOrder),
+    queryKey: ["members", search, page, sortField, sortOrder, limit],
+    queryFn: () =>
+      apiClient.getMembers({ search, page, sortField, sortOrder, limit }),
     placeholderData: keepPreviousData,
     staleTime: 1000 * 60 * 5,
   });
@@ -32,11 +34,20 @@ const MembersTable = () => {
   useEffect(() => {
     if (!isPlaceholderData) {
       queryClient.prefetchQuery({
-        queryKey: ["members", search, page, sortField, sortOrder],
-        queryFn: () => apiClient.getMembers(search, page, sortField, sortOrder),
+        queryKey: ["members", search, page, sortField, sortOrder, limit],
+        queryFn: () =>
+          apiClient.getMembers({ search, page, sortField, sortOrder, limit }),
       });
     }
-  }, [search, page, sortField, sortOrder, isPlaceholderData, queryClient]);
+  }, [
+    search,
+    page,
+    sortField,
+    sortOrder,
+    limit,
+    isPlaceholderData,
+    queryClient,
+  ]);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
@@ -124,8 +135,11 @@ const MembersTable = () => {
               </td>
               <td className="border  border-gray-300 px-4 py-2 hidden lg:table-cell text-center">
                 <img
-                  src={`http://localhost:5000/uploads/${member.profilePicture}`}
-                  defaultValue={avater}
+                  src={
+                    member.profilePicture !== null
+                      ? `http://localhost:5000/uploads/${member.profilePicture}`
+                      : `${aviation}`
+                  }
                   alt="profile"
                   className="w-10 h-10 object-cover  rounded-full"
                 />

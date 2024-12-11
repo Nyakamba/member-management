@@ -44,14 +44,15 @@ export const addMember = async (formData: FormData) => {
   return response.data;
 };
 
-export const getMembers = async (
-  search: string,
-  page: number,
-  sortField: string,
-  sortOrder: string
-) => {
+export const getMembers = async ({
+  search = "",
+  page = 1,
+  limit = 10,
+  sortField = "name",
+  sortOrder = "asc",
+}) => {
   const response = await axiosInstance.get(`/api/members`, {
-    params: { search, page, sortField, sortOrder },
+    params: { search, page, sortField, sortOrder, limit },
   });
 
   return response.data;

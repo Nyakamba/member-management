@@ -23,6 +23,7 @@ const ViewMore = ({ memberId }: ViewMoreProps) => {
     mutationFn: (id: number) => apiClient.deleteMember(id),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ["members"] }),
   });
+
   const handleDelete = async (id: number) => {
     if (window.confirm("Are you sure you want to delete this member?")) {
       mutate(id);

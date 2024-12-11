@@ -13,7 +13,6 @@ import EditMember from "./pages/EditMember";
 import Login from "./pages/Login";
 import Members from "./pages/Members";
 import Register from "./pages/Register";
-import MemberDetails from "./pages/MemberDetails";
 
 function App() {
   const { isLoggedIn, isAdmin, isAuthLoading } = useAppContext();
@@ -74,14 +73,6 @@ function App() {
               element={
                 <Layout>
                   <EditMember />
-                </Layout>
-              }
-            />
-            <Route
-              path="/member-details/:memberId"
-              element={
-                <Layout>
-                  <MemberDetails />
                 </Layout>
               }
             />
