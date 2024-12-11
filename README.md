@@ -168,14 +168,20 @@ cd member-management
 ### Members
 
 - `GET /api/members`: Fetch all members with pagination, search, and sorting.
-- `POST /api/members`: Create a new member (Admin only).
-- `PUT /api/members/:id`: Update member details (Admin only).
-- `DELETE /api/members/:id`: Delete a member (Admin only).
+- `POST /api/members`: Create a new member and create member activity is created as well (Admin only).
+- `PUT /api/members/:id`: Update member details and upadte member activity is created as well (Admin only).
+- `DELETE /api/members/:id`: Delete a member and delete member activity is created as well (Admin only).
 
 ### Roles
 
 - `GET /api/roles`: Fetch all roles with role counts.
 - `POST /api/roles`: Create a new roles (Admin only).
+
+---
+
+### Activity Logs
+
+- `GET /api/activities`: Fetch all activities with activity counts.
 
 ---
 
