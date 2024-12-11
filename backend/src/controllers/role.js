@@ -2,8 +2,23 @@ import { prisma } from "../db.js";
 
 export const getAllRoles = async (req, res) => {
   try {
-    const roles = await prisma.role.findMany();
-    res.status(200).json({ roles });
+    const rolesCount = await prisma.role.findMany({
+      select: {
+        name: true,
+        _count: {
+          select: {
+            members: true,
+          },
+        },
+      },
+    });
+    res.status(200).json({
+      success: true,
+      data: rolesCount.map((role) => ({
+        name: role.name,
+        count: role._count.members,
+      })),
+    });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "something went wrong" });
