@@ -185,6 +185,12 @@ cd member-management
 
 ---
 
+### Stats
+
+- `GET /api/stats`: Fetch all statistics.
+
+---
+
 ## Screenshots
 
 ### Login Page
