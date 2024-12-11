@@ -1,3 +1,7 @@
+import * as apiClient from "../api/apiClient";
+
+import { useQuery } from "@tanstack/react-query";
+
 import {
   BarChart,
   Bar,
@@ -11,26 +15,29 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-// Role Distribution Data
-const roleDistributionData = [
-  { name: "Admins", value: 10 },
-  { name: "Editors", value: 15 },
-  { name: "Auditors", value: 5 },
-  { name: "Guests", value: 8 },
-  { name: "Moderators", value: 12 },
-];
-
-// Activity Logs Data
-const activityLogsData = [
-  { name: "Created", value: 20 },
-  { name: "Updated", value: 35 },
-  { name: "Deleted", value: 10 },
-];
-
-// Colors for Pie Chart
-const COLORS = ["#ff6384", "#36a2eb", "#ffcd56", "#4bc0c0", "#9966ff"];
-
 function RoleDistributionBarChart() {
+  const {
+    data: rolesCount,
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ["rolesCount"],
+    queryFn: apiClient.getRoles,
+  });
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (isError || !rolesCount) {
+    return <div>Error loading role distribution data</div>;
+  }
+
+  const roleDistributionData = rolesCount.data.data.map((role: any) => ({
+    name: role.name,
+    value: role.count,
+  }));
+
   return (
     <ResponsiveContainer width="100%" height={250}>
       <BarChart data={roleDistributionData}>
@@ -45,6 +52,31 @@ function RoleDistributionBarChart() {
 }
 
 function ActivityLogsPieChart() {
+  const {
+    data: activityCount,
+    isError,
+    isLoading,
+  } = useQuery({
+    queryKey: ["activityCount"],
+    queryFn: apiClient.getActivities,
+  });
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (isError || !activityCount) {
+    return <div>Error loading activity logs data</div>;
+  }
+
+  const activityLogsData = activityCount.data.data.map((activity: any) => ({
+    name: activity.action.split(" ")[0],
+    value: activity.count,
+  }));
+
+  //console.log(activityLogsData);
+
+  const COLORS = ["#ff6384", "#36a2eb", "#ffcd56", "#4bc0c0", "#9966ff"];
   return (
     <ResponsiveContainer width="100%" height={250}>
       <PieChart>
@@ -58,7 +90,7 @@ function ActivityLogsPieChart() {
           fill="#36a2eb"
           label
         >
-          {activityLogsData.map((entry, index) => (
+          {activityLogsData.map((entry: any, index: number) => (
             <Cell
               key={`cell-${index}`}
               fill={COLORS[index % COLORS.length]}
