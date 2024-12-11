@@ -83,3 +83,15 @@ export const getMemberStats = async () => {
 
   return response.data;
 };
+
+export const getRoles = async () => {
+  const response = await axiosInstance.get(`/api/roles`);
+
+  return response;
+};
+
+export const getActivities = async () => {
+  const response = await axiosInstance.get(`/api/activities`);
+
+  return response;
+};
