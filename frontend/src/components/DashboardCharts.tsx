@@ -78,7 +78,7 @@ function ActivityLogsPieChart() {
 
   const COLORS = ["#ff6384", "#36a2eb", "#ffcd56", "#4bc0c0", "#9966ff"];
   return (
-    <ResponsiveContainer width="100%" height={250}>
+    <ResponsiveContainer width="100%" height={290}>
       <PieChart>
         <Pie
           data={activityLogsData}
@@ -114,8 +114,8 @@ export default function DashboardCharts() {
         </h2>
         <RoleDistributionBarChart />
       </div>
-      <div className="w-full sm:w-[50%]">
-        <h2 className="text-lg text-center  font-semibold mb-4">
+      <div className="w-full  sm:w-[50%]">
+        <h2 className="text-lg text-center  font-semibold ">
           Member Activity Logs
         </h2>
         <ActivityLogsPieChart />
