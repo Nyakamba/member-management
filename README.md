@@ -198,7 +198,7 @@ cd member-management
 
 ### Members List
 
-![Members List](/frontend/src/assets/screenshots/members-1.png)
+![Members List](/frontend/src/assets/screenshots/members.png)
 
 ---
 
