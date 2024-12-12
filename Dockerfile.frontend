@@ -25,7 +25,7 @@ RUN npm run build
 RUN npm install -g serve
 
 # Expose the port for the frontend
-EXPOSE 5173
+EXPOSE 3000
 
 # Serve the React app (use serve for production)
 CMD ["serve","-s", "dist"]
