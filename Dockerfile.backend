@@ -1,32 +1,32 @@
-# Use official Node.js image based on Alpine
+
 FROM node:18-alpine
 
-# Set the working directory inside the container
+
 WORKDIR /app
 
-# Install required dependencies (OpenSSL, Bash, etc.)
+
 RUN apk update && apk add --no-cache \
   openssl \
   bash \
   && rm -rf /var/cache/apk/*
 
-# Copy package.json and package-lock.json for efficient layer caching
+
 COPY backend/package*.json ./
 
-# Install backend dependencies
+
 RUN npm install
 
-# Copy the rest of the backend files
+
 COPY backend/ .
 
-# Set environment variables (Optional for SQLite)
+
 ENV DATABASE_URL="file:./dev.db"
 
-# Build the app (Optional if needed)
+
 RUN npm run build
 
-# Expose the port that your backend app is running on
+
 EXPOSE 5000
 
-# Start the backend app
+
 CMD ["npm", "start"]

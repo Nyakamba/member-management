@@ -1,31 +1,29 @@
-# Use official Node.js image for frontend
 FROM node:18-alpine
 
-# Set the working directory inside the container
+
 WORKDIR /app
 
-# Accept environment variables
+
 ARG - VITE_API_BASE_URL
 
-# Make the variable available during build
+
 ENV VITE_API_BASE_URL=$VITE_API_BASE_URL
 
-# Copy package.json and package-lock.json
+
 COPY frontend/package*.json ./
 
-# Install dependencies
+
 RUN npm install
 
-# Copy the rest of the frontend files
 COPY frontend/ .
 
-# Build the React app
+
 RUN npm run build
 
 RUN npm install -g serve
 
-# Expose the port for the frontend
+
 EXPOSE 3000
 
-# Serve the React app (use serve for production)
+
 CMD ["serve","-s", "dist"]
